@@ -4,6 +4,13 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="light dark" />
+  <script>
+    (function() {
+      var saved = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+    })();
+  </script>
   <title>Class-less preview • shadcn-inspired CSS</title>
   <meta name="description" content="A class-less example inspired by shadcn components." />
   <link rel="stylesheet" href="css/shadcn-classless.css" />
@@ -17,7 +24,7 @@
     <div class="demo-sidenav">
       Getting started
 
-      <a href="#introdution">Introdution</a>
+      <a href="#introdution">Introduction</a>
       <a href="#installation">Installation</a>
       <a href="#preview">Preview</a>
       <a href="#typography">Typography</a>
@@ -26,41 +33,25 @@
 
       Components
       <a href="#accordion">Accordion</a>
-      <a disabled href="#">Alert</a>
-      <a disabled href="#">Alert Dialog</a>
-      <a disabled href="#">Aspect Ratio</a>
       <a href="#avatar">Avatar</a>
       <a href="#badge">Badge</a>
       <a href="#breadcrumb">Breadcrumb</a>
       <a href="#button">Button</a>
-      <a disabled href="#">Calendar</a>
       <a href="#card">Card</a>
-      <a href="#carousel">Carousel</a>
-      <a href="#chart">Chart</a>
       <a href="#checkbox">Checkbox</a>
-      <a disabled href="#">Collapsible</a>
-      <a disabled href="#">Combobox</a>
-      <a disabled href="#">Command</a>
-      <a disabled href="#">Context Menu</a>
-      <a disabled href="#">Data Table</a>
-      <a disabled href="#">Date Picker</a>
       <a href="#dialog">Dialog</a>
       <a href="#drawer">Drawer</a>
-      <a disabled href="#">Dropdown Menu</a>
       <a href="#form">Form</a>
       <a href="#group">Group</a>
-      <a disabled href="#">Hover Card</a>
       <a href="#input">Input</a>
       <a href="#inputotp">Input OTP</a>
       <a href="#label">Label</a>
       <a href="#loading">Loading</a>
       <a href="#menubar">Menubar</a>
       <a href="#navigationmenu">Navigation Menu</a>
-      <a disabled href="#">Pagination</a>
       <a href="#popover">Popover</a>
       <a href="#progress">Progress</a>
       <a href="#radio">Radio Group</a>
-      <a disabled href="#">Resizable</a>
       <a href="#scrollarea">Scroll Area</a>
       <a href="#select">Select</a>
       <a href="#separator">Separator</a>
@@ -71,11 +62,14 @@
       <a href="#sonner">Sonner</a>
       <a href="#switch">Switch</a>
       <a href="#table">Table</a>
-      <a disabled href="#">Tabs</a>
       <a href="#textarea">Textarea</a>
       <a href="#toast">Toast</a>
       <a href="#toggle">Toggle</a>
       <a href="#tooltip">Tooltip</a>
+
+      <hr>
+
+      <a href="#roadmap">Roadmap</a>
 
     </div>
 
@@ -87,9 +81,14 @@
           <h1>shadcn-inspired</h1>
           <p>A class-less example inspired by shadcn components.</p>
         </hgroup>
-        <button id="themeToggle" onclick="toggleTheme()">
-          <span id="themeIcon">🌙</span> Toggle theme
-        </button>
+        <div class="demo-intro-actions">
+          <button id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">
+            <span id="themeIconWrapper"><i data-lucide="moon"></i></span> Toggle theme
+          </button>
+          <a href="https://github.com/fordus/shadcn-classless" target="_blank" rel="noopener" class="demo-github-btn">
+            <i data-lucide="star"></i> Star on GitHub
+          </a>
+        </div>
         <p class="demo-intro-text">
           Please note that not all shadcn components nor features can be implemented only with CSS. <br />
           We try our best to get as close as possible to what it has to offer.
@@ -100,20 +99,19 @@
 
       <section id="installation">
         <h2>Installation</h2>
-        <p>
-          You can include the framework directly via CDN:
+        <p>Include the framework directly via CDN:</p>
+        <div class="demo-install-block">
           <div id="installCDN" class="demo-code"></div>
-        </p>
-        <p>
-          Or download the dist/shadcn-classless.css file from this repository and include it locally:
+          <button class="demo-copy-btn" onclick="copyCode('installCDN', this)" aria-label="Copy to clipboard">Copy</button>
+        </div>
+        <p>Or download and include it locally:</p>
+        <div class="demo-install-block">
           <div id="installLocal" class="demo-code"></div>
-        </p>
-        <p>
-          Then, start writing your HTML without worrying about classes!
-        </p>
+          <button class="demo-copy-btn" onclick="copyCode('installLocal', this)" aria-label="Copy to clipboard">Copy</button>
+        </div>
+        <p>Then start writing HTML without worrying about classes!</p>
         <small>
-          *Note that in some of the following components, we use icons. <br />
-          These icons come from Lucid icon pack and are not shipped in the distribution.
+          *Note: some components use icons from the Lucide icon pack, which is not included in the distribution.
         </small>
       </section>
 
@@ -322,20 +320,6 @@
             <small>Duis nec elit placerat, suscipit nibh quis, finibus neque.</small>
           </footer>
         </article>
-      </section>
-
-      <hr />
-
-      <section id="carousel">
-        <h2>Carousel</h2>
-        TODO
-      </section>
-
-      <hr />
-
-      <section id="chart">
-        <h2>Chart</h2>
-        TODO
       </section>
 
       <hr />
@@ -989,6 +973,36 @@
 
       <hr />
 
+      <hr />
+
+      <!-- Roadmap -->
+      <section id="roadmap">
+        <h2>Roadmap</h2>
+        <p>Components planned for future releases.</p>
+        <div class="demo-roadmap-grid">
+          <kbd>Carousel</kbd>
+          <kbd>Chart</kbd>
+          <kbd>Alert</kbd>
+          <kbd>Alert Dialog</kbd>
+          <kbd>Aspect Ratio</kbd>
+          <kbd>Calendar</kbd>
+          <kbd>Collapsible</kbd>
+          <kbd>Combobox</kbd>
+          <kbd>Command</kbd>
+          <kbd>Context Menu</kbd>
+          <kbd>Data Table</kbd>
+          <kbd>Date Picker</kbd>
+          <kbd>Dropdown Menu</kbd>
+          <kbd>Hover Card</kbd>
+          <kbd>Pagination</kbd>
+          <kbd>Resizable</kbd>
+          <kbd>Tabs</kbd>
+        </div>
+      </section>
+      <!-- ./ Roadmap -->
+
+      <hr />
+
       <!-- Footer -->
       <footer>
         <small>
@@ -1002,6 +1016,11 @@
     </main>
 
   </div>
+
+  <button id="backToTop" onclick="document.querySelector('.demo-main').scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+    <i data-lucide="arrow-up"></i>
+  </button>
+
   <script src="js/lucide.min.js"></script>
   <script>
     lucide.createIcons();
@@ -1019,9 +1038,10 @@
     }
 
     function updateThemeIcon(theme) {
-      const icon = document.getElementById('themeIcon');
-      if (icon) {
-        icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+      const wrapper = document.getElementById('themeIconWrapper');
+      if (wrapper) {
+        wrapper.innerHTML = `<i data-lucide="${theme === 'dark' ? 'sun' : 'moon'}"></i>`;
+        lucide.createIcons();
       }
     }
 
@@ -1046,6 +1066,27 @@
 
     // Initialize on page load
     initTheme();
+
+    // Copy code to clipboard
+    function copyCode(id, btn) {
+      const el = document.getElementById(id);
+      const text = (el.querySelector('pre')?.textContent || el.textContent).trim();
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+        }, 1500);
+      });
+    }
+
+    // Back to top visibility
+    const demoMain = document.querySelector('.demo-main');
+    const backToTopBtn = document.getElementById('backToTop');
+    demoMain.addEventListener('scroll', () => {
+      backToTopBtn.classList.toggle('visible', demoMain.scrollTop > 300);
+    });
   </script>
 </body>
 
